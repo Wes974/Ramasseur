@@ -1,6 +1,6 @@
 # Ramasseur de Balles
 
-Ce dépôt contient tous le code Arduino pour le Projet Intedisiplinaire (P.I.) du robot Ramasseur de Balles.
+Ce dépôt contient tous le code Arduino pour le Projet Interdisciplinaire (P.I.) du robot Ramasseur de Balles.
 
 ## Matériel
 
@@ -11,6 +11,4 @@ Ce dépôt contient tous le code Arduino pour le Projet Intedisiplinaire (P.I.) 
 
 ## Note importante
 
-Travail en cours…
-
-![](Images/work.png)
+![Travail en cours…](Images/work.png)
