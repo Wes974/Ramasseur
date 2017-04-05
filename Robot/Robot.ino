@@ -3,7 +3,7 @@
 #include <Pixy.h>
 
 /// Pour la distance
-/*
+
 // A CALIBRER !!!
 #define distanceCalibree 11 // en cm
 
@@ -29,7 +29,7 @@ float moyenne;
 // distance focale et distance pour la hateur calculée de la même façon
 
 /// Fin distance
-*/
+
 /// Pour les moteurs
 
 // Moteur 1
@@ -44,18 +44,27 @@ int in4 = 6;
 
 Pixy pixy; // Créer pixy
 
+uint16_t blocks;
+char buf[32]; // ??
+int j;
+
+float tableauDistanceBalles[];
+bool tourCompletEffectue = FALSE;
+
+int distanceEtPositionBalles[][2];
+
 void setup() {
-/*
+
     // Caméra
     Serial.begin(9600);
-    Serial.print("Début...\n")
+    Serial.print("Début...\n");
     // Initialise pixycam
     pixy.init();
 
     // Calcule la distance focale
     largeurDistanceFocale = (largeurCalibree * distanceCalibree) / largeurDeObjet;
     hauteurDistanceFocale = (hauteurCalibree * distanceCalibree) / hauteurDeObjet;
-*/
+
     // Moteur comme sortie
     pinMode(enA, OUTPUT);
     pinMode(enB, OUTPUT);
@@ -92,8 +101,8 @@ void demoOne() {
     digitalWrite(in4, LOW);
 }
 
-/*
-void aligne() {
+
+void aligne() {
     if (pixy.blocks[j].x < 135) {
         // Aller à gauche
     } else if (pixy.blocks[j].x > 165) {
@@ -121,7 +130,7 @@ void mesureDistance() {
         Serial.print(distanceLargeur);
         Serial.print("cm");
         Serial.print("Distance H: ");
-        Serial.print(distanceHeight);
+        Serial.print(distanceHauteur);
         Serial.print("cm. Angle:");
         Serial.println(pixy.blocks[j].angle);
         Serial.print("moyenne: ");
@@ -132,19 +141,14 @@ void mesureDistance() {
 
 }
 
-*/
+/*
 
 void loop() {
 
     demoOne();
     delay(1000);
 
-    /*
-
     static int i = 0;
-    int j;
-    uint16_t blocks;
-    char buf[32]; // ??
 
     // grab blocks!
     blocks = pixy.getBlocks();
@@ -152,22 +156,75 @@ void loop() {
     // If there are detect blocks, print them!
     if (blocks) {
 
-      i++;
+        i++;
 
-      Serial.print(pixy.blocks[j].x);
-      Serial.print(" \n");
+        Serial.print(pixy.blocks[j].x);
+        Serial.print(" \n");
 
-      if (i%50==0) {
+        if (i%50==0) {
 
-        aligne();
+            aligne();
 
-        mesureDistance();
+            mesureDistance();
 
-        //avancer
+            //avancer
 
       }
     }
 
-    */
+}
+
+*/
+
+void loop() {
+
+    int distanceLaPlusProche;
+
+    while (tourCompletEffectue == FALSE) {
+
+        // Balle(s) détectée(s) ?
+        if (blocks) {
+
+            mesureDistance();
+
+            tableauDistanceBalles += distanceLargeur;
+            // à faire pour le tableau à 2 dimensions
+
+            // Tourner de 90°
+
+            //for (int x = 0; x < (sizeof(tableauDistanceBalles)/sizeof(int)); x++) { // tester avec: x < (array.size())
+            //
+            //}
+
+            distanceLaPlusProche = tableauDistanceBalles.getMin();
+
+            mesureDistance();
+
+            while (round(distanceLargeur) != round(distanceLaPlusProche) ) {
+                // Tourner de 90
+                delay(1000);
+                mesureDistance();
+                delay(1000);
+            }
+
+            tourCompletEffectue = TRUE;
+
+            aligne();
+
+            // Commencer l'approche de la Balle
+
+            while (distanceLargeur > 5) {
+                // avancer
+                delay(1000);
+            }
+
+        }
+
+    // Réinitialisation
+    if (tourCompletEffectue) {
+
+        tourCompletEffectue = FALSE;
+
+    }
 
 }
