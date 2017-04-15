@@ -14,10 +14,10 @@
 */
 
 #define Calibrate 0 //Change to 1 see above for details.
-#define calDistance 60 //in inches 24inches or 2 foot
+#define calDistance 30 //in inches 24inches or 2 foot
 
 
-int calWidth = 21; //Calibrated width reading
+int calWidth = 38; //Calibrated width reading
 int calHeight = 21; //Calibrated height reading
 int pixelsWidth;   //read by the camera
 int pixelsHeight; //read by the camera

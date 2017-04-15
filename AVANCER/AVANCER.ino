@@ -57,15 +57,25 @@ void TournerG() {
   digitalWrite(MDN, LOW);
     // put your main code here, to run repeatedly:
   analogWrite (MoteurG, 100);
-  analogWrite (MoteurD, 130); 
+  analogWrite (MoteurD, 126); 
   //Reste a ajouter un delai ou une boucle tant que pour savoir quand s'arrête
-delay(2000); 
+delay(420); 
+}
+void Stop() {
+  digitalWrite(MGR, HIGH);
+  digitalWrite(MGN, LOW);
+  digitalWrite(MDR, HIGH);
+  digitalWrite(MDN, LOW);
+    // put your main code here, to run repeatedly:
+  analogWrite (MoteurG, 0);
+  analogWrite (MoteurD, 0); 
+  //Reste a ajouter un delai ou une boucle tant que pour savoir quand s'arrête
+delay(2000);
 }
 void loop() {
-Avancer(); 
-Reculer();
-TournerD(); 
+ 
 TournerG(); 
-	
+Stop();  
+ 
 
 }
