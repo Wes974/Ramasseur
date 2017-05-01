@@ -72,6 +72,9 @@ void tournerGauche() {
     digitalWrite(MDR, HIGH);
     digitalWrite(MDN, LOW);
 
+    analogWrite(moteurD, 120);
+    delay(10);
+
     // Vitesse
     analogWrite(moteurG, 0);//70);
     analogWrite(moteurD, 80);//70);
@@ -111,7 +114,7 @@ void loop() {
             if (pixy.blocks[j].x < 188) {
 
                 // Si la taille de la balle est < 18 px
-                if (pixy.blocks[j].height < 18) {
+                if (pixy.blocks[j].width < 48 && pixy.blocks[j].height < 20) {
                     avancer();
                     blocks = pixy.getBlocks();
                 } else if (pixy.blocks[j].height > 18) {
