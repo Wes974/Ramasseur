@@ -12,7 +12,3 @@ Ce dépôt contient tout le code Arduino pour le Projet Interdisciplinaire (P.I.
 - Arduino IDE
 - PlatformIO
 - …
-
-## Note importante
-
-![Travail en cours…](Images/work.png)
